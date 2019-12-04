@@ -22,7 +22,7 @@ class SchedulerService {
     const notifyClients = (events: ScheduledEvent[]): void => {
       // Await responses to ensure all responses are correctly published
       events.forEach(async (event: ScheduledEvent): Promise<void> => {
-        return await NotifierFactory.getNotifier(event.callback)
+        return NotifierFactory.getNotifier(event.callback)
           .notify(event.message)
       })
     }
