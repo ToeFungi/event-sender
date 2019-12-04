@@ -3,6 +3,9 @@
  */
 interface CallbackConfig {
   url: string
+  headers?: {
+    [name: string]: string
+  }
   type: string
 }
 

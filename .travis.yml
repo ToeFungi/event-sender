@@ -53,7 +53,7 @@ jobs:
 #          - master
 #      deploy:
 #        provider: lambda
-#        function_name: 'event-scheduler'
+#        function_name: 'event-sender'
 #        region: '$AWS_REGION'
 #        role: '$AWS_LAMBDA_ROLE'
 #        handler_name: 'handler'
