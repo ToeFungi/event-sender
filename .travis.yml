@@ -40,22 +40,22 @@ jobs:
         sonarcloud:
           token:
             secure: "$SONAR_API_KEY"
-#    - stage: build
-#      branches:
-#        only:
-#          - master
-#      script:
-#        - sed -i 's/<GIT_HASH>/$TRAVIS_COMMIT/g' src/lib/Version.ts
-#        - npm run build
-#    - stage: deploy
-#      branches:
-#        only:
-#          - master
-#      deploy:
-#        provider: lambda
-#        function_name: 'event-scheduler'
-#        region: '$AWS_REGION'
-#        role: '$AWS_LAMBDA_ROLE'
-#        handler_name: 'handler'
-#        runtime: 'nodejs10.x'
-#        zip: './build/index.zip'
+    - stage: build
+      branches:
+        only:
+          - master
+      script:
+        - sed -i 's/<GIT_HASH>/$TRAVIS_COMMIT/g' src/lib/Version.ts
+        - npm run build
+    - stage: deploy
+      branches:
+        only:
+          - master
+      deploy:
+        provider: lambda
+        function_name: 'event-sender'
+        region: '$AWS_REGION'
+        role: '$AWS_LAMBDA_ROLE'
+        handler_name: 'handler'
+        runtime: 'nodejs10.x'
+        zip: './build/index.zip'

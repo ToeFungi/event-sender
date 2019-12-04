@@ -4,8 +4,9 @@ class SchedulerService {
   constructor(protected schedulerRepository: SchedulerRepository) {
   }
 
-  public getEvents(time: string) {
-    this.schedulerRepository.getScheduledEvents(time)
+  public publishScheduledEvents(time: string) {
+    return this.schedulerRepository.getScheduledEvents(time)
+      .then()
   }
 }
 
