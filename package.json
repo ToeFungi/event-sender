@@ -1,0 +1,54 @@
+{
+  "name": "event-sender",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "webpack",
+    "test": "mocha",
+    "coverage": "nyc --reporter=lcov mocha",
+    "lint": "tslint -c tslint.json 'src/**/*.ts'"
+  },
+  "keywords": [
+    "Time-based",
+    "Event",
+    "Scheduler",
+    "DynamoDB",
+    "AWS",
+    "Lambda"
+  ],
+  "author": "Alex Pickering",
+  "license": "MIT",
+  "dependencies": {
+    "aws-sdk": "^2.580.0",
+    "axios": "^0.19.0",
+    "moment": "^2.24.0",
+    "moment-timezone": "^0.5.27"
+  },
+  "devDependencies": {
+    "@types/axios": "^0.14.0",
+    "@types/chai": "^4.2.5",
+    "@types/chai-as-promised": "^7.1.2",
+    "@types/mocha": "^5.2.7",
+    "@types/moment": "^2.13.0",
+    "@types/moment-timezone": "^0.5.12",
+    "@types/nock": "^11.1.0",
+    "@types/sinon": "^7.5.1",
+    "@types/sinon-chai": "^3.2.3",
+    "chai": "^4.2.0",
+    "chai-as-promised": "^7.1.1",
+    "mocha": "^6.2.2",
+    "nock": "^11.7.0",
+    "nyc": "^14.1.1",
+    "sinon": "^7.5.0",
+    "sinon-chai": "^3.3.0",
+    "ts-loader": "^6.2.1",
+    "ts-node": "^8.5.2",
+    "tslint": "^5.20.1",
+    "tslint-config-standard": "^9.0.0",
+    "typescript": "^3.7.2",
+    "webpack": "^4.41.2",
+    "webpack-cli": "^3.3.10",
+    "zip-webpack-plugin": "^3.0.0"
+  }
+}

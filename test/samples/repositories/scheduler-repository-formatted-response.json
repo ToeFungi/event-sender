@@ -1,0 +1,12 @@
+[
+  {
+    "scheduledTime": "2019-12-04T15:43:39.840Z",
+    "callback": {
+      "type": "HTTP",
+      "url": "http://some-callback-url.com"
+    },
+    "message": {
+      "foo": "bar"
+    }
+  }
+]
