@@ -1,0 +1,22 @@
+[
+  {
+    "message": {
+      "other": "message"
+    },
+    "callback": {
+      "type": "HTTP",
+      "url": "http://some-other-url.com"
+    },
+    "scheduledTime": "2019-04-04T14:00"
+  },
+  {
+    "message": {
+      "some": "message"
+    },
+    "callback": {
+      "type": "HTTP",
+      "url": "http://some-url.com"
+    },
+    "scheduledTime": "2019-04-04T14:00"
+  }
+]
