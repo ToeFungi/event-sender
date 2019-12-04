@@ -3,11 +3,12 @@ import Axios, { AxiosRequestConfig, AxiosInstance } from 'axios'
 
 import { CallbackConfig } from '../types/CallbackConfig'
 import { ScheduledMessage } from '../types/ScheduledMessage'
+import { Notifier } from '../types/Notifier'
 
 /**
  * HTTPCallback sends a notification to the client via HTTP
  */
-class HTTPCallback {
+class HTTPCallback implements Notifier {
   /**
    * The HTTP client used to send the notification
    */
@@ -26,7 +27,7 @@ class HTTPCallback {
   /**
    * Sends a notification to the relevant http endpoint with the payload scheduled
    */
-  public notify(message: ScheduledMessage) {
+  public notify(message: ScheduledMessage): Promise<void> {
     /**
      * Tap response and log it
      */
