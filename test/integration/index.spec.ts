@@ -1,7 +1,7 @@
 import { handler } from '../../src'
 
 const event = {
-  time: '2019-12-01T15:43:39.840Z'
+  time: '2019-12-05T16:27:32.846Z'
 }
 
 handler(event)
