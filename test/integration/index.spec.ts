@@ -1,9 +1,7 @@
 import { handler } from '../../src'
 
-const event = {
-  time: '2019-12-05T16:27:32.846Z'
-}
+// Schedule an event for in the future and run the integration test on the minute the event is scheduled for
 
-handler(event)
+handler()
   .then(() => console.log('finished'))
   .catch(console.error)

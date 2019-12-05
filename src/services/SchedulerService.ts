@@ -19,8 +19,8 @@ class SchedulerService {
   /**
    * Publish scheduled events via the callback mechanisms specified in the messages
    */
-  public publishScheduledEvents(time: string): Promise<void> {
-    const formattedTime = moment(time)
+  public publishScheduledEvents(): Promise<void> {
+    const formattedTime = moment()
       .tz('UTC')
       .format('YYYY-MM-DDTHH:mm')
 

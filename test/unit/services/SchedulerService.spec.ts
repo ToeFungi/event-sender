@@ -55,7 +55,7 @@ describe('SchedulerService', () => {
         .onSecondCall()
         .resolves()
 
-      return schedulerService.publishScheduledEvents(time)
+      return schedulerService.publishScheduledEvents()
         .should.be.fulfilled
         .then(() => {
           schedulerRepository.getScheduledEvents.should.have.been.calledOnceWithExactly(formattedTime)
@@ -80,7 +80,7 @@ describe('SchedulerService', () => {
         .onFirstCall()
         .resolves()
 
-      return schedulerService.publishScheduledEvents(time)
+      return schedulerService.publishScheduledEvents()
         .should.be.fulfilled
         .then(() => {
           notifierFactory.should.have.been.calledOnceWithExactly(singleEvent.callback)
@@ -94,7 +94,7 @@ describe('SchedulerService', () => {
         .onFirstCall()
         .rejects(new Error('Something strange is afoot.'))
 
-      return schedulerService.publishScheduledEvents(time)
+      return schedulerService.publishScheduledEvents()
         .should.be.rejectedWith(Error, 'Something strange is afoot.')
     })
   })
