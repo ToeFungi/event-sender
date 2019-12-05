@@ -31,7 +31,7 @@ class HTTPCallback implements Notifier {
     /**
      * Tap response and log it
      */
-    const tapResponse = (): void => console.debug('Successfully notified client.')
+    const tapResponse = (): void => console.debug('Successfully notified client')
 
     /**
      * Tap and log and rethrow the error

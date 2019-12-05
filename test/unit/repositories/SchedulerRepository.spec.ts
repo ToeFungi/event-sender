@@ -5,6 +5,7 @@ import { DDBMock } from '../../support/mocks/DDBMock'
 import * as rawSchedulerResponse from '../../samples/repositories/scheduler-repository-raw-response.json'
 import * as emptySchedulerResponse from '../../samples/repositories/scheduler-repository-empty-response.json'
 import * as formattedSchedulerResponse from '../../samples/repositories/scheduler-repository-formatted-response.json'
+import { NoScheduledEventsError } from '../../../src/errors/NoScheduledEventsError'
 
 describe('SchedulerRepository', () => {
   const sandbox = createSandbox()
@@ -48,7 +49,7 @@ describe('SchedulerRepository', () => {
         .resolves(emptySchedulerResponse)
 
       return schedulerRepository.getScheduledEvents(scheduledTime)
-        .should.be.rejectedWith(Error, 'No scheduled items, skipping.')
+        .should.be.rejectedWith(NoScheduledEventsError, 'No scheduled items, skipping.')
     })
 
     it('rejects when an error occurs in the repository', () => {

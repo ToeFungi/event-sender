@@ -2,6 +2,7 @@ import { AWSError } from 'aws-sdk'
 import { DocumentClient, ScanInput, ScanOutput } from 'aws-sdk/clients/dynamodb'
 
 import { ScheduledEvent } from '../types/ScheduledEvent'
+import { NoScheduledEventsError } from '../errors/NoScheduledEventsError'
 
 /**
  * SchedulerRepository access DynamoDB to manipulate stored scheduled events
@@ -32,7 +33,7 @@ class SchedulerRepository {
       console.debug('Response items from DynamoDB', JSON.stringify({ items }))
 
       if (!items.Items || !items.Items.length) {
-        throw new Error('No scheduled items, skipping.')
+        throw new NoScheduledEventsError('No scheduled items, skipping.')
       }
 
       return items.Items.map((item: any): ScheduledEvent => JSON.parse(item.payload).payload as ScheduledEvent)

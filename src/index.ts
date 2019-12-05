@@ -1,11 +1,21 @@
 import * as AWS from 'aws-sdk'
+
+import { Version } from './lib/Version'
+import { Controller } from './Controller'
+import { SchedulerService } from './services/SchedulerService'
 import { SchedulerRepository } from './repositories/SchedulerRepository'
 
+// Repositories
 const ddb = new AWS.DynamoDB.DocumentClient({
   region: 'eu-west-1'
 })
 const schedulerRepository = new SchedulerRepository(ddb)
 
-schedulerRepository.getScheduledEvents('2019-10-04T15:43')
-  .then(console.log)
-  .catch(console.error)
+// Services
+const schedulerService = new SchedulerService(schedulerRepository)
+
+// Controller
+const controller = new Controller(schedulerService)
+
+console.log('EventSender', Version.getGitHash())
+export const handler = controller.handler.bind(controller)
