@@ -1,3 +1,4 @@
+import { SQSProducer } from '../../../src/producers/SQSProducer'
 import { HTTPCallback } from '../../../src/clients/HTTPCallback'
 import { CallbackConfig } from '../../../src/types/CallbackConfig'
 import { NotifierFactory } from '../../../src/factories/NotifierFactory'
@@ -6,6 +7,8 @@ import { NotificationMethods } from '../../../src/enums/NotificationMethods'
 describe('NotifierFactory', () => {
   const createCase = (instance: any, name: string, type: string) => ({ instance, name, type })
   const tests = [
+    createCase(HTTPCallback, 'HTTPCallback', 'unknown'),
+    createCase(SQSProducer, 'SQSProducer', NotificationMethods.SQS),
     createCase(HTTPCallback, 'HTTPCallback', NotificationMethods.HTTP)
   ]
 

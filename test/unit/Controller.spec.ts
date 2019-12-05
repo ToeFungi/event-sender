@@ -7,10 +7,6 @@ import { NoScheduledEventsError } from '../../src/errors/NoScheduledEventsError'
 describe('Controller', () => {
   const sandbox = createSandbox()
 
-  const event = {
-    time: '2019-04-12T14:00:00.000Z'
-  }
-
   let schedulerService: any
   let controller: Controller
 
@@ -30,10 +26,10 @@ describe('Controller', () => {
         .onFirstCall()
         .resolves()
 
-      return controller.handler(event)
+      return controller.handler()
         .should.be.fulfilled
         .then(() => {
-          schedulerService.publishScheduledEvents.should.have.been.calledOnceWithExactly(event.time)
+          schedulerService.publishScheduledEvents.should.have.been.calledOnceWithExactly()
         })
     })
 
@@ -42,10 +38,10 @@ describe('Controller', () => {
         .onFirstCall()
         .rejects(new NoScheduledEventsError('No events scheduled.'))
 
-      return controller.handler(event)
+      return controller.handler()
         .should.be.fulfilled
         .then(() => {
-          schedulerService.publishScheduledEvents.should.have.been.calledOnceWithExactly(event.time)
+          schedulerService.publishScheduledEvents.should.have.been.calledOnceWithExactly()
         })
     })
 
@@ -54,10 +50,10 @@ describe('Controller', () => {
         .onFirstCall()
         .rejects(new Error('Something strange is afoot.'))
 
-      return controller.handler(event)
+      return controller.handler()
         .should.be.rejectedWith(Error, 'Something strange is afoot.')
         .then(() => {
-          schedulerService.publishScheduledEvents.should.have.been.calledOnceWithExactly(event.time)
+          schedulerService.publishScheduledEvents.should.have.been.calledOnceWithExactly()
         })
     })
   })

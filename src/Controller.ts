@@ -11,7 +11,7 @@ class Controller {
   /**
    * Entry point into sender, gets the current time and attempts to get the scheduled events and publish them
    */
-  public handler(event: any): Promise<void> {
+  public handler(): Promise<void> {
     /**
      * Tap and log response error
      */
@@ -34,8 +34,8 @@ class Controller {
       throw error
     }
 
-    console.log('Attempting to get and publish scheduled events', JSON.stringify({ event }))
-    return this.schedulerService.publishScheduledEvents(event.time)
+    console.log('Attempting to get and publish scheduled events')
+    return this.schedulerService.publishScheduledEvents()
       .then(tapResponse)
       .catch(tapError)
   }
