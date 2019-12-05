@@ -11,16 +11,16 @@ class Controller {
   /**
    * Entry point into sender, gets the current time and attempts to get the scheduled events and publish them
    */
-  public handler(event: any) {
+  public handler(event: any): Promise<void> {
     /**
      * Tap and log response error
      */
-    const tapResponse = () => console.log('Successfully published scheduled events')
+    const tapResponse = (): void => console.log('Successfully published scheduled events')
 
     /**
      * Tap and log and rethrow error
      */
-    const tapError = (error: Error) => {
+    const tapError = (error: Error): never | Promise<void> => {
       if (error instanceof NoScheduledEventsError) {
         console.log('No events scheduled to be sent, aborting')
         return Promise.resolve()
