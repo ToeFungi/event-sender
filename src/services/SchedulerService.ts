@@ -1,3 +1,7 @@
+import 'moment-timezone'
+
+import * as moment from 'moment'
+
 import { AWSError } from 'aws-sdk'
 
 import { ScheduledEvent } from '../types/ScheduledEvent'
@@ -16,6 +20,10 @@ class SchedulerService {
    * Publish scheduled events via the callback mechanisms specified in the messages
    */
   public publishScheduledEvents(time: string): Promise<void> {
+    const formattedTime = moment(time)
+      .tz('UTC')
+      .format('YYYY-MM-DDTHH:mm')
+
     /**
      * Loop through each event and notify the client
      */
@@ -40,8 +48,8 @@ class SchedulerService {
       throw error
     }
 
-    console.debug('Attempting to get scheduled events and notify clients', JSON.stringify({ time }))
-    return this.schedulerRepository.getScheduledEvents(time)
+    console.debug('Attempting to get scheduled events and notify clients', JSON.stringify({ formattedTime }))
+    return this.schedulerRepository.getScheduledEvents(formattedTime)
       .then(notifyClients)
       .then(tapResponse)
       .catch(tapError)

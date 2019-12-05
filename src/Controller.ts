@@ -5,9 +5,7 @@ class Controller {
   }
 
   public handler(event: any) {
-    const tapResponse = () => console.log('Successfully ')
-
-    return this.schedulerService.getEvents(event.time)
+    return this.schedulerService.publishScheduledEvents(event.time)
   }
 }
 
