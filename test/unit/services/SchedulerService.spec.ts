@@ -1,3 +1,5 @@
+import { reset, set } from 'mockdate'
+
 import { createSandbox } from 'sinon'
 
 import { HTTPCallback } from '../../../src/clients/HTTPCallback'
@@ -10,7 +12,8 @@ import * as multipleHTTPEvents from '../../samples/services/scheduler-service-mu
 describe('SchedulerService', () => {
   const sandbox = createSandbox()
 
-  const time = '2019-04-04T14:00'
+  const time = '2019-11-27T15:47:32.846Z'
+  const formattedTime = '2019-11-27T15:47'
 
   let httpCallback: any
   let notifierFactory: any
@@ -18,6 +21,7 @@ describe('SchedulerService', () => {
   let schedulerService: SchedulerService
 
   beforeEach(() => {
+    set(time)
     notifierFactory = sandbox.stub(NotifierFactory, 'getNotifier')
 
     httpCallback = sandbox.createStubInstance(HTTPCallback)
@@ -27,6 +31,7 @@ describe('SchedulerService', () => {
   })
 
   afterEach(() => {
+    reset()
     sandbox.restore()
   })
 
@@ -53,7 +58,7 @@ describe('SchedulerService', () => {
       return schedulerService.publishScheduledEvents(time)
         .should.be.fulfilled
         .then(() => {
-          schedulerRepository.getScheduledEvents.should.have.been.calledOnceWithExactly(time)
+          schedulerRepository.getScheduledEvents.should.have.been.calledOnceWithExactly(formattedTime)
           notifierFactory.should.have.callCount(2).and.calledWith(firstEvent.callback)
             .and.calledWith(secondEvent.callback)
           httpCallback.notify.should.have.callCount(2).and.calledWith(firstEvent.message)
@@ -80,7 +85,7 @@ describe('SchedulerService', () => {
         .then(() => {
           notifierFactory.should.have.been.calledOnceWithExactly(singleEvent.callback)
           httpCallback.notify.should.have.been.calledOnceWithExactly(singleEvent.message)
-          schedulerRepository.getScheduledEvents.should.have.been.calledOnceWithExactly(time)
+          schedulerRepository.getScheduledEvents.should.have.been.calledOnceWithExactly(formattedTime)
         })
     })
 

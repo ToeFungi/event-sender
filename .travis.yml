@@ -1,14 +1,14 @@
 language: node_js
 
 node_js:
-  - "10"
+  - '10'
 
 cache:
   directories:
-    - "$HOME/.sonar/cache"
-    - "node_modules"
-    - "coverage"
-    - "build"
+    - '$HOME/.sonar/cache'
+    - 'node_modules'
+    - 'coverage'
+    - 'build'
 
 stages:
   - setup
@@ -39,23 +39,17 @@ jobs:
       addons:
         sonarcloud:
           token:
-            secure: "$SONAR_API_KEY"
-#    - stage: build
-#      branches:
-#        only:
-#          - master
-#      script:
-#        - sed -i 's/<GIT_HASH>/$TRAVIS_COMMIT/g' src/lib/Version.ts
-#        - npm run build
-#    - stage: deploy
-#      branches:
-#        only:
-#          - master
-#      deploy:
-#        provider: lambda
-#        function_name: 'event-sender'
-#        region: '$AWS_REGION'
-#        role: '$AWS_LAMBDA_ROLE'
-#        handler_name: 'handler'
-#        runtime: 'nodejs10.x'
-#        zip: './build/index.zip'
+            secure: '$SONAR_API_KEY'
+    - stage: build
+      script:
+        - sed -i 's/<GIT_HASH>/$TRAVIS_COMMIT/g' src/lib/Version.ts
+        - npm run build
+    - stage: deploy
+      deploy:
+        provider: lambda
+        function_name: 'event-sender'
+        region: '$AWS_REGION'
+        role: '$AWS_ROLE'
+        handler_name: 'handler'
+        runtime: 'nodejs10.x'
+        zip: './build/index.zip'
